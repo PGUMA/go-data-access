@@ -45,3 +45,19 @@ func ReadFileLineByLine(fp string) ([]byte, error) {
 	}
 	return b, nil
 }
+
+func WriteFile(fp string, b []byte) error {
+	f, err := os.Create(fp)
+	if err != nil {
+		fmt.Printf("error %v", err)
+		return err
+	}
+
+	_, err = f.Write(b)
+	if err != nil {
+		fmt.Printf("error %v", err)
+		return err
+	}
+
+	return nil
+}

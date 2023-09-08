@@ -26,12 +26,8 @@ func (m *MyData) Str() string {
 }
 
 func SelectMyDataAll() {
-	// TODO 環境変数等から接続文字列を取得する
-	con, err := sql.Open("postgres", "postgres://pguma:password@localhost:5432/dev?sslmode=disable")
-	if err != nil {
-		log.Fatalln("failed to connect DB", err)
-	}
 
+	con := connect()
 	defer con.Close()
 
 	q := "select * from mydata"
@@ -48,4 +44,13 @@ func SelectMyDataAll() {
 		}
 		fmt.Println(md.Str())
 	}
+}
+
+func connect() *sql.DB {
+	// TODO 環境変数等から接続文字列を取得する
+	con, err := sql.Open("postgres", "postgres://pguma:password@localhost:5432/dev?sslmode=disable")
+	if err != nil {
+		log.Fatalln("failed to connect DB", err)
+	}
+	return con
 }

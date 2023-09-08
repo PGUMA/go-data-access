@@ -46,6 +46,22 @@ func SelectMyDataAll() {
 	}
 }
 
+func SelectMyData(id int) MyData {
+	con := connect()
+	defer con.Close()
+
+	q := "select * from mydata where id = $1"
+	rs := con.QueryRow(q, id)
+
+	var md MyData
+	err := rs.Scan(&md.ID, &md.Name, &md.Mail, &md.Age)
+	if err != nil {
+		log.Fatalln("row fetch error", err)
+	}
+
+	return md
+}
+
 func connect() *sql.DB {
 	// TODO 環境変数等から接続文字列を取得する
 	con, err := sql.Open("postgres", "postgres://pguma:password@localhost:5432/dev?sslmode=disable")

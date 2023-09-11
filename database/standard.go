@@ -78,6 +78,14 @@ func UpdateMyData(md *MyData) {
 	con.Exec(q, md.Name, md.Mail, md.Age)
 }
 
+func DeleteMyData(name string) {
+	con := connect()
+	defer con.Close()
+
+	q := "delete from mydata where name=$1"
+	con.Exec(q, name)
+}
+
 func connect() *sql.DB {
 	// TODO 環境変数等から接続文字列を取得する
 	con, err := sql.Open("postgres", "postgres://pguma:password@localhost:5432/dev?sslmode=disable")

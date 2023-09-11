@@ -29,3 +29,9 @@ func TestUpdateMyData(t *testing.T) {
 
 	SelectMyDataAll()
 }
+
+func TestDeleteMyData(t *testing.T) {
+	DeleteMyData("PGUMA")
+
+	SelectMyDataAll()
+}

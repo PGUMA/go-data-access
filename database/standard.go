@@ -70,6 +70,14 @@ func CreateMyData(md *MyData) {
 	con.Exec(q, md.Name, md.Mail, md.Age)
 }
 
+func UpdateMyData(md *MyData) {
+	con := connect()
+	defer con.Close()
+
+	q := "update mydata set name=$1, mail=$2, age=$3 where Name='PGUMA'"
+	con.Exec(q, md.Name, md.Mail, md.Age)
+}
+
 func connect() *sql.DB {
 	// TODO 環境変数等から接続文字列を取得する
 	con, err := sql.Open("postgres", "postgres://pguma:password@localhost:5432/dev?sslmode=disable")

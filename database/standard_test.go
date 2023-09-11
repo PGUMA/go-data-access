@@ -22,3 +22,10 @@ func TestCreateMyData(t *testing.T) {
 
 	SelectMyDataAll()
 }
+
+func TestUpdateMyData(t *testing.T) {
+	md := MyData{Name: "PGUMA", Mail: "pguma@test@update", Age: 100}
+	UpdateMyData(&md)
+
+	SelectMyDataAll()
+}

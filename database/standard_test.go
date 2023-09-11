@@ -15,3 +15,10 @@ func TestSelectMyData(t *testing.T) {
 		t.Errorf("not match instance. %v", md)
 	}
 }
+
+func TestCreateMyData(t *testing.T) {
+	md := MyData{Name: "PGUMA", Mail: "pguma@test", Age: 100}
+	CreateMyData(&md)
+
+	SelectMyDataAll()
+}
